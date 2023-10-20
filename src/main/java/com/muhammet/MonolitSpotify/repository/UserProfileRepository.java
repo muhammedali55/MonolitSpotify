@@ -1,6 +1,8 @@
 package com.muhammet.MonolitSpotify.repository;
 
+import com.muhammet.MonolitSpotify.dto.response.FindAllUserProfileResponseDto;
 import com.muhammet.MonolitSpotify.repository.entity.UserProfile;
+import com.muhammet.MonolitSpotify.repository.view.VwUserProfile;
 import com.muhammet.MonolitSpotify.utility.enums.State;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -145,6 +147,8 @@ public interface UserProfileRepository extends JpaRepository<UserProfile,Long> {
     UserProfile egerKullanicininResmiYokIseVeAdiMuhammetIseBul(String userName, Long createAt);
 
 
+    @Query("select new com.muhammet.MonolitSpotify.dto.response.FindAllUserProfileResponseDto(u.id,u.userName,u.resimUrl) from UserProfile u")
+    List<FindAllUserProfileResponseDto> findAllFromUserProfile();
 
 
 }

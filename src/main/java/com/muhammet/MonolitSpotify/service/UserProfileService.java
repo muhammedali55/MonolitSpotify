@@ -1,11 +1,15 @@
 package com.muhammet.MonolitSpotify.service;
 
+import com.muhammet.MonolitSpotify.dto.request.SaveUserProfileRequestDto;
+import com.muhammet.MonolitSpotify.dto.response.FindAllUserProfileResponseDto;
 import com.muhammet.MonolitSpotify.repository.UserProfileRepository;
 import com.muhammet.MonolitSpotify.repository.entity.UserProfile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,14 +32,14 @@ public class UserProfileService {
      * dha temiz görünmesini sağlar.
      */
 
-//    @Autowired
-//    private UserProfileRepository repositoryYontem_1;
+    //    @Autowired
+    //    private UserProfileRepository repositoryYontem_1;
 
-//    private final UserProfileRepository repositoryYontem_2;
-//
-//    public UserProfileService(UserProfileRepository repositoryYontem_2){
-//       this.repositoryYontem_2 = repositoryYontem_2;
-//    }
+    //    private final UserProfileRepository repositoryYontem_2;
+    //
+    //    public UserProfileService(UserProfileRepository repositoryYontem_2){
+    //       this.repositoryYontem_2 = repositoryYontem_2;
+    //    }
     private final UserProfileRepository repository;
 
     public void save(UserProfile userProfile){
@@ -50,9 +54,23 @@ public class UserProfileService {
         repository.save(userProfile);
     }
 
+    public void save(SaveUserProfileRequestDto dto){
+        if(!dto.getPassword().equals(dto.getRePassword()))
+            throw new RuntimeException("Şifreler Uyuşmuyor");
+        repository.save(
+                UserProfile.builder()
+                        .userName(dto.getUserName())
+                        .build()
+        );
+    }
+
     public List<UserProfile> findAll(){
         return repository.findAll();
     }
 
+
+    public List<FindAllUserProfileResponseDto> findAllUserProfile() {
+        return repository.findAllFromUserProfile();
+    }
 
 }
