@@ -2,6 +2,8 @@ package com.muhammet.MonolitSpotify.service;
 
 import com.muhammet.MonolitSpotify.dto.request.SaveUserProfileRequestDto;
 import com.muhammet.MonolitSpotify.dto.response.FindAllUserProfileResponseDto;
+import com.muhammet.MonolitSpotify.exception.ErrorType;
+import com.muhammet.MonolitSpotify.exception.MonolitSpotifyException;
 import com.muhammet.MonolitSpotify.repository.UserProfileRepository;
 import com.muhammet.MonolitSpotify.repository.entity.UserProfile;
 import lombok.RequiredArgsConstructor;
@@ -56,7 +58,7 @@ public class UserProfileService {
 
     public void save(SaveUserProfileRequestDto dto){
         if(!dto.getPassword().equals(dto.getRePassword()))
-            throw new RuntimeException("Şifreler Uyuşmuyor");
+            throw new MonolitSpotifyException(ErrorType.SIFRE_UYUSMUYOR);
         repository.save(
                 UserProfile.builder()
                         .userName(dto.getUserName())
@@ -69,8 +71,12 @@ public class UserProfileService {
     }
 
 
-    public List<FindAllUserProfileResponseDto> findAllUserProfile() {
-        return repository.findAllFromUserProfile();
+    public FindAllUserProfileResponseDto findAllUserProfile() {
+        return FindAllUserProfileResponseDto.builder()
+                .statusCode(100)
+                .message("Listeler başarı şekilde çekildi")
+                .data(repository.findAllFromUserProfileView())
+                .build();
     }
 
 }

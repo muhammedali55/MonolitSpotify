@@ -8,6 +8,9 @@ public class MonolitSpotifyApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MonolitSpotifyApplication.class, args);
+
 	}
 
 }
+
+

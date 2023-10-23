@@ -44,7 +44,11 @@ public class UserProfileController {
     }
 
     @GetMapping(FINDALL)
-    public ResponseEntity<List<FindAllUserProfileResponseDto>> findAllUserProfile(){
+    public ResponseEntity<FindAllUserProfileResponseDto> findAllUserProfile(){
+        /**
+         * ok -> 200 başarılı kodu
+         * badRequest -> 400 hata kodu
+         */
         return ResponseEntity.ok(userProfileService.findAllUserProfile());
     }
 

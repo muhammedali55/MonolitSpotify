@@ -1,6 +1,6 @@
 package com.muhammet.MonolitSpotify.dto.response;
 
-import com.muhammet.MonolitSpotify.repository.view.VwUserProfile;
+import com.muhammet.MonolitSpotify.repository.entity.Muzik;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,11 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class FindAllUserProfileResponseDto {
+public class FindAllMuzikResponseDto {
     int statusCode;
     String message;
-    int currentPage;
-    boolean hasNext;
-    List<VwUserProfile> data;
-
+    List<Muzik> data;
 }
