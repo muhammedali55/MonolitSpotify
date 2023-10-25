@@ -52,5 +52,13 @@ public class UserProfileController {
         return ResponseEntity.ok(userProfileService.findAllUserProfile());
     }
 
+    @GetMapping("/testException")
+    public ResponseEntity<String> testException(String ifade){
+        if(ifade.length()<10){
+            throw new RuntimeException("girdiğiniz ifade 10 karakterden az olamaz");
+        }
+        return ResponseEntity.ok("Aferin başarılı");
+    }
+
 
 }
