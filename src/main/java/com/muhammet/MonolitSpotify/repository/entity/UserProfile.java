@@ -18,8 +18,11 @@ public class UserProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    @Column(unique = true)
     String userName;
     String resimUrl;
+    String password;
+    String email;
     int followerCount;
     int folowingCount;
     Long createAt;

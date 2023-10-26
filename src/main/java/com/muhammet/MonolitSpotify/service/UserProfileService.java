@@ -6,6 +6,7 @@ import com.muhammet.MonolitSpotify.exception.ErrorType;
 import com.muhammet.MonolitSpotify.exception.MonolitSpotifyException;
 import com.muhammet.MonolitSpotify.repository.UserProfileRepository;
 import com.muhammet.MonolitSpotify.repository.entity.UserProfile;
+import com.muhammet.MonolitSpotify.utility.enums.State;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -59,11 +60,19 @@ public class UserProfileService {
     public void save(SaveUserProfileRequestDto dto){
         if(!dto.getPassword().equals(dto.getRePassword()))
             throw new MonolitSpotifyException(ErrorType.SIFRE_UYUSMUYOR);
-        repository.save(
-                UserProfile.builder()
-                        .userName(dto.getUserName())
-                        .build()
-        );
+        if(repository.existsByUserName(dto.getUserName()))
+            throw new MonolitSpotifyException(ErrorType.KAYITLI_KULLANICI_ADI);
+        UserProfile userProfile = UserProfile.builder()
+                .userName(dto.getUserName())
+                .userType(dto.getUserType())
+                .createAt(System.currentTimeMillis())
+                .updateAt(System.currentTimeMillis())
+                .resimUrl(dto.getResimUrl())
+                .password(dto.getPassword())
+                .email(dto.getEmail())
+                .state(State.ACTIVE)
+                .build();
+        repository.save(userProfile);
     }
 
     public List<UserProfile> findAll(){

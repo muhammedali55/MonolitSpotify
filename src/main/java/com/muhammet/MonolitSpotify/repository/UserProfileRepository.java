@@ -153,4 +153,10 @@ public interface UserProfileRepository extends JpaRepository<UserProfile,Long> {
 //    List<FindAllUserProfileResponseDto> findAllFromUserProfile();
 
 
+    @Query("select COUNT(u)>0 from UserProfile u where u.userName= ?1")
+    boolean buKullaniciAdiVarmi(String userName);
+
+    boolean existsByUserName(String userName);
+
+    //Optional<UserProfile> findOptionalByUserName(String userName);
 }

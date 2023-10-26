@@ -1,5 +1,6 @@
 package com.muhammet.MonolitSpotify.service;
 
+import com.muhammet.MonolitSpotify.dto.request.AddMusicForArtistRequestDto;
 import com.muhammet.MonolitSpotify.dto.request.SaveMuzikRequestDto;
 import com.muhammet.MonolitSpotify.dto.response.FindAllMuzikResponseDto;
 import com.muhammet.MonolitSpotify.mapper.MuzikMapper;
@@ -39,5 +40,16 @@ public class MuzikService {
                 .message("Müzik listesi getirildi.")
                 .data(repository.findAll())
                 .build();
+    }
+
+    /**
+     * TODO: 1- Kullanıcı id mevcut mu bakılmalı
+     * TODO: 2- Muzik id varmı kontrol edilmeli
+     * TODO: 3- Kullanıcı id si verilen kişi sanatçı mı? kontrol edilecek.
+     * TODO: 4- Eğer aynı kullanıcı id ve muzik id daha önce kayıt edilmiş ise tekrar kayıt edilememeli.
+     *
+     */
+    public void addMusicForArtist(AddMusicForArtistRequestDto dto) {
+
     }
 }

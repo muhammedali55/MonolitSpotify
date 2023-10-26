@@ -1,5 +1,6 @@
 package com.muhammet.MonolitSpotify.controller;
 
+import com.muhammet.MonolitSpotify.dto.request.AddMusicForArtistRequestDto;
 import com.muhammet.MonolitSpotify.dto.request.SaveMuzikRequestDto;
 import com.muhammet.MonolitSpotify.dto.response.FindAllMuzikResponseDto;
 import com.muhammet.MonolitSpotify.service.MuzikService;
@@ -25,5 +26,11 @@ public class MuzikController {
     public ResponseEntity<FindAllMuzikResponseDto> findAll(){
         FindAllMuzikResponseDto result = muzikService.findAll();
         return ResponseEntity.ok(result);
+    }
+
+    @PostMapping(ADDMUSICFORARTIST)
+    public ResponseEntity<Void> addMusicForArtist(@RequestBody @Valid AddMusicForArtistRequestDto dto){
+        muzikService.addMusicForArtist(dto);
+        return ResponseEntity.ok().build();
     }
 }

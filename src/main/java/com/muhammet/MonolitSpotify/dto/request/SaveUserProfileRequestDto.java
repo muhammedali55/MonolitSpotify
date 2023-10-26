@@ -1,5 +1,6 @@
 package com.muhammet.MonolitSpotify.dto.request;
 
+import com.muhammet.MonolitSpotify.utility.enums.UserType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -17,7 +18,7 @@ public class SaveUserProfileRequestDto {
     @NotBlank(message = "Kullanıcı adını boş geçemezsiniz.")
     @Size(min = 3,max = 64, message = "Bak arkadaşım lütfen kısa ya da uzuuuuun isimler kullanma. 3-64 arası :)")
     @Pattern(
-            regexp = "^(?=.*[0-9])(?=.*[a-z])(?=\\S+$).{3,}$",
+            regexp = "^(?=.*[a-z])(?=\\S+$).{3,}$",
             message = "Kullanıcı adı için sadece küçük harf ve rakam girebilirsiniz."
     )
     String userName;
@@ -30,4 +31,6 @@ public class SaveUserProfileRequestDto {
     )
     String password;
     String rePassword;
+    UserType userType;
+    String resimUrl;
 }
