@@ -4,6 +4,7 @@ import com.muhammet.MonolitSpotify.dto.response.FindAllUserProfileResponseDto;
 import com.muhammet.MonolitSpotify.repository.entity.UserProfile;
 import com.muhammet.MonolitSpotify.repository.view.VwUserProfile;
 import com.muhammet.MonolitSpotify.utility.enums.State;
+import com.muhammet.MonolitSpotify.utility.enums.UserType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -157,6 +158,15 @@ public interface UserProfileRepository extends JpaRepository<UserProfile,Long> {
     boolean buKullaniciAdiVarmi(String userName);
 
     boolean existsByUserName(String userName);
+
+
+    boolean existsByIdAndUserType(Long id, UserType userType);
+
+  /**
+   * existsByIdAndUserType ile aynı işi yapar.
+   */
+    @Query("select COUNT(u)>0 FROM UserProfile u where u.id=?1 and u.userType=?2")
+    boolean boyleBirArtistVarmi(Long id, UserType userType);
 
     //Optional<UserProfile> findOptionalByUserName(String userName);
 }

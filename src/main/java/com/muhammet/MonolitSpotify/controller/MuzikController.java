@@ -3,11 +3,14 @@ package com.muhammet.MonolitSpotify.controller;
 import com.muhammet.MonolitSpotify.dto.request.AddMusicForArtistRequestDto;
 import com.muhammet.MonolitSpotify.dto.request.SaveMuzikRequestDto;
 import com.muhammet.MonolitSpotify.dto.response.FindAllMuzikResponseDto;
+import com.muhammet.MonolitSpotify.repository.entity.Muzik;
 import com.muhammet.MonolitSpotify.service.MuzikService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static com.muhammet.MonolitSpotify.constants.RestApi.*;
 @RestController
@@ -32,5 +35,11 @@ public class MuzikController {
     public ResponseEntity<Void> addMusicForArtist(@RequestBody @Valid AddMusicForArtistRequestDto dto){
         muzikService.addMusicForArtist(dto);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/getAllMusicFromArtistId/{id}")
+    public ResponseEntity<List<Muzik>> getAllMusicFromArtistId(@PathVariable("id") Long id){
+        List<Muzik> result = muzikService.findAllMuzikFromArtistId(id);
+        return ResponseEntity.ok(result);
     }
 }

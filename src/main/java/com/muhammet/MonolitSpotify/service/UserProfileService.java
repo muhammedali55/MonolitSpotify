@@ -7,6 +7,7 @@ import com.muhammet.MonolitSpotify.exception.MonolitSpotifyException;
 import com.muhammet.MonolitSpotify.repository.UserProfileRepository;
 import com.muhammet.MonolitSpotify.repository.entity.UserProfile;
 import com.muhammet.MonolitSpotify.utility.enums.State;
+import com.muhammet.MonolitSpotify.utility.enums.UserType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -88,4 +89,11 @@ public class UserProfileService {
                 .build();
     }
 
+    public boolean existsById(Long artistId) {
+        return repository.existsById(artistId);
+    }
+
+    public boolean isArtist(Long artistId){
+        return repository.existsByIdAndUserType(artistId, UserType.ARTIST);
+    }
 }
